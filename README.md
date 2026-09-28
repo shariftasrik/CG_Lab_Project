@@ -3,20 +3,6 @@
 A stationary Earth with multiple animated satellites, based on your uploaded
 Earth GLB and the satellite model and texture images inside your RAR archive.
 
-## What changed
-
-- The Earth is loaded directly from `timeworx-world-4045.glb`, including its original geometry, UVs and embedded Earth image.
-- The satellite uses the actual OBJ mesh and 15 matching base-color, normal and roughness texture images from `75-satellite.rar`.
-- A bundled DejaVu Sans font replaces the previous system-font stack. All interface text uses this explicit local font, avoiding symbol-glyph substitutions from local font lookup.
-- Earth has no animation. The view has no automatic rotation, dragging or satellite-follow translation. Scroll/pinch changes zoom only.
-- Start with four satellites; use + and - to manage 0–24 satellites. Every satellite gets a different orbital radius, inclination, phase and plane orientation.
-- Earth and satellite surface materials use opacity 1, transparency off, depth writing on, and no distance fog.
-- Hover over a satellite or its name to see details. Click it or a Mission list entry to pin details. Close/Escape clears the pinned selection.
-- Each information card shows a fictional name and country, mission, operator, rotation speed, orbital angular speed, orbital period, inclination, demo altitude, demo signal, launch date and operational status.
-- The far-away Sun, Jupiter, Mars and Neptune are small and subdued, with distance haze. They do not move or affect the orbit model.
-- Show/hide orbit paths, satellite names and distant bodies independently.
-- Original, gold and white satellite texture maps remain selectable, preserving the lab's texture-change feature.
-
 ## 1. Install once
 
 1. Install VS Code: https://code.visualstudio.com/
