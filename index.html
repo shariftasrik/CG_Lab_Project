@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060d17" />
+    <link rel="icon" href="data:," />
+    <title>Orbit Atlas | Satellite Explorer</title>
+  </head>
+  <body>
+    <canvas
+      id="scene"
+      aria-label="Stationary Earth with animated satellites and a movable sun. Scroll to zoom."
+    ></canvas>
+    <div id="satellite-labels" aria-label="Satellite labels"></div>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span
+        ><strong>ORBIT ATLAS</strong
+        ><span class="brand-sub">EARTH OBSERVATION LAB</span>
+      </div>
+      <div class="status">
+        <span class="status-dot"></span><span id="status">LOADING MODELS</span>
+      </div>
+    </header>
+    <aside class="panel" aria-label="Simulation controls">
+      <p class="eyebrow">CSE4204 / COMPUTER GRAPHICS</p>
+      <h1>One Earth.<br />Many missions.</h1>
+      <p class="intro">
+        Add satellites. Explore their orbits.<br />Hover over a satellite to
+        inspect it.
+      </p>
+      <fieldset id="controls" disabled>
+        <section>
+          <div class="section-heading">
+            <h2>Satellite fleet</h2>
+            <span class="badge">MAX 24</span>
+          </div>
+          <div class="counter">
+            <button
+              id="remove"
+              class="count-button"
+              aria-label="Remove selected or last satellite"
+            >
+              -
+            </button>
+            <div>
+              <output id="count" aria-live="polite">0</output
+              ><span>ACTIVE SATELLITES</span>
+            </div>
+            <button id="add" class="count-button" aria-label="Add satellite">
+              +
+            </button>
+          </div>
+          <p class="hint">Each satellite has a different orbit.</p>
+        </section>
+        <section>
+          <div class="section-heading">
+            <h2>Simulation speed</h2>
+            <output id="speed-value">1.0x</output>
+          </div>
+          <label class="sr-only" for="speed">Simulation speed</label>
+          <input
+            id="speed"
+            type="range"
+            min="0.2"
+            max="3"
+            step="0.1"
+            value="1"
+          />
+          <div class="actions">
+            <button id="pause" class="primary">Pause orbits</button
+            ><button id="reset">Reset</button>
+          </div>
+        </section>
+        <section>
+          <div class="section-heading">
+            <h2>Earth rotation speed</h2>
+            <output id="earth-speed-value">1.0x</output>
+          </div>
+
+          <label class="sr-only" for="earth-speed">
+            Earth rotation speed
+          </label>
+
+          <input
+            id="earth-speed"
+            type="range"
+            min="0"
+            max="5"
+            step="0.1"
+            value="1"
+          />
+        </section>
+        <section>
+          <h2>Satellite surface</h2>
+          <label class="sr-only" for="texture">Satellite texture</label>
+          <select id="texture">
+            <option value="0">Original archive textures</option>
+            <option value="1">Gold thermal coating</option>
+            <option value="2">White thermal coating</option>
+          </select>
+        </section>
+        <section>
+          <h2>Sun light</h2>
+          <p class="hint">
+            Drag the sun, or hold the arrow keys. Earth and the satellites
+            light from that direction.
+          </p>
+        </section>
+        <section>
+          <h2>Show in scene</h2>
+          <label class="toggle"
+            ><input type="checkbox" id="show-orbits" checked /> Orbit
+            paths</label
+          >
+          <label class="toggle"
+            ><input type="checkbox" id="show-labels" checked /> Satellite
+            names</label
+          >
+          <label class="toggle"
+            ><input type="checkbox" id="show-background" checked /> Distant Sun
+            and planets</label
+          >
+        </section>
+        <section class="fleet-section">
+          <div class="section-heading">
+            <h2>Mission list</h2>
+            <span class="badge">DEMO DATA</span>
+          </div>
+          <div id="fleet-list" aria-label="Select a satellite"></div>
+        </section>
+      </fieldset>
+      <p class="footnote">
+        Earth stays fixed. Scroll or pinch to zoom.<br />All satellite
+        identities and telemetry are fictional.<br />Sun model by Sebastian
+        Sosnowski, CC BY 4.0.
+      </p>
+    </aside>
+    <div class="scene-note">
+      <span class="small-orbit"></span>
+      <div>EARTH<small>STATIONARY / FULL OPACITY</small></div>
+    </div>
+    <div class="view-help">
+      Drag the sun or use the arrow keys <span>/</span> Hover to inspect
+      <span>/</span> Click to pin
+    </div>
+    <aside
+      id="info"
+      class="info-card"
+      hidden
+      aria-label="Satellite information"
+    >
+      <div class="info-top">
+        <span id="info-type">SATELLITE / DEMO DATA</span
+        ><button id="close-info" aria-label="Close satellite details">
+          Close
+        </button>
+      </div>
+      <h2 id="info-name"></h2>
+      <p id="info-country"></p>
+      <dl id="telemetry"></dl>
+      <p class="info-note">Simulated values, not live orbital telemetry.</p>
+    </aside>
+    <div id="loading" role="status">
+      <span class="loading-dot"></span
+      ><strong>Loading your Earth, sun, and satellite models</strong>
+      <p id="loading-message">Preparing textures and readable fonts...</p>
+    </div>
+    <div id="error" role="alert" hidden></div>
+    <footer>Computer Graphics Lab Project | AUST CSE | Fall 2025</footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
